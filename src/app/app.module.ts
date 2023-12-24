@@ -7,6 +7,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { SuppliersPageComponent } from './pages/suppliers-page/suppliers-page.component';
 import { SuppliersDetailsComponent } from './pages/suppliers-details/suppliers-details.component';
+import { SupplierTableComponent } from './components/supplier-table/supplier-table.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   imports: [
@@ -15,8 +18,15 @@ import { SuppliersDetailsComponent } from './pages/suppliers-details/suppliers-d
     HttpClientModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatCheckboxModule,
+    MatTableModule,
   ],
-  declarations: [AppComponent, SuppliersPageComponent, SuppliersDetailsComponent],
+  declarations: [
+    AppComponent,
+    SuppliersPageComponent,
+    SuppliersDetailsComponent,
+    SupplierTableComponent,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
