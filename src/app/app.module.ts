@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { SuppliersPageComponent } from './pages/suppliers-page/suppliers-page.component';
+import { StoresPageComponent } from './pages/stores-page/stores-page.component';
 import { SuppliersDetailsComponent } from './pages/suppliers-details/suppliers-details.component';
 import { SupplierTableComponent } from './components/supplier-table/supplier-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -23,7 +23,7 @@ import { MatTableModule } from '@angular/material/table';
   ],
   declarations: [
     AppComponent,
-    SuppliersPageComponent,
+    StoresPageComponent,
     SuppliersDetailsComponent,
     SupplierTableComponent,
   ],

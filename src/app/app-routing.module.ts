@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SuppliersPageComponent } from './pages/suppliers-page/suppliers-page.component';
+import { StoresPageComponent } from './pages/stores-page/stores-page.component';
 import { SuppliersDetailsComponent } from './pages/suppliers-details/suppliers-details.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: SuppliersPageComponent,
+    component: StoresPageComponent,
   },
   {
     path: 'supplier/:id',
