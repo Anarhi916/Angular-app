@@ -2,6 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { ISuppliers, SupplierService } from '../../services/supplier.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
+import {
+  MatDialog,
+  MatDialogRef,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-supplier-table',
@@ -10,7 +18,10 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class SupplierTableComponent implements OnInit {
   dataSource: MatTableDataSource<ISuppliers>;
-  constructor(public supplierService: SupplierService) {}
+  constructor(
+    public supplierService: SupplierService,
+    public dialog: MatDialog
+  ) {}
   ngOnInit(): void {
     this.supplierService.getAllStores().subscribe(() => {
       this.dataSource = new MatTableDataSource<ISuppliers>(
@@ -37,5 +48,18 @@ export class SupplierTableComponent implements OnInit {
     }
 
     this.selection.select(...this.dataSource.data);
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  navToStoreDetails(row: ISuppliers) {
+    debugger;
+  }
+
+  deleteRowsPress() {
+    const selectedRows: ISuppliers[] = this.selection.selected;
   }
 }

@@ -10,6 +10,8 @@ import { SuppliersDetailsComponent } from './pages/suppliers-details/suppliers-d
 import { SupplierTableComponent } from './components/supplier-table/supplier-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   imports: [
@@ -20,6 +22,8 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatCheckboxModule,
     MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   declarations: [
     AppComponent,

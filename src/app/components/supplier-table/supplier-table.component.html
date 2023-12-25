@@ -1,5 +1,24 @@
+<mat-form-field>
+  <mat-label>Filter</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Search..."
+    #input
+  />
+</mat-form-field>
+<div class="toolbar-buttons">
+  <button mat-button color="primary">Create</button>
+  <button
+    (click)="deleteRowsPress()"
+    [disabled]="!selection.selected.length"
+    mat-button
+    color="primary"
+  >
+    Delete
+  </button>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!-- Checkbox Column -->
   <ng-container matColumnDef="select">
     <th mat-header-cell *matHeaderCellDef>
       <mat-checkbox
@@ -36,8 +55,14 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr
+    class="rowHower"
     mat-row
     *matRowDef="let row; columns: displayedColumns"
-    (click)="selection.toggle(row)"
+    (click)="navToStoreDetails(row)"
   ></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">
+      No data matching the filter "{{ input.value }}"
+    </td>
+  </tr>
 </table>
