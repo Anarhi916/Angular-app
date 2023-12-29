@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, retry, tap, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError, forkJoin, map } from 'rxjs';
 
 export interface ISuppliers {
   Name: string;
@@ -22,5 +22,17 @@ export class SupplierService {
     return this.http
       .get<ISuppliers[]>('http://localhost:3000/api/Stores')
       .pipe(tap((stores) => (this.stores = stores)));
+  }
+
+  deleteStores(stores: ISuppliers[]): Observable<void> {
+    const deleteRequests: Observable<void>[] = stores.map((store) =>
+      this.http.delete<void>(`http://localhost:3000/api/Stores/${store.id}`)
+    );
+    return forkJoin(deleteRequests).pipe(
+      map(() => {}),
+      catchError((error: HttpErrorResponse) => {
+        return throwError(() => error.message);
+      })
+    );
   }
 }

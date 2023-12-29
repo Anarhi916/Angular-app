@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ISuppliers, SupplierService } from '../../services/supplier.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
@@ -56,10 +56,22 @@ export class SupplierTableComponent implements OnInit {
   deleteRowsPress() {
     const selectedRows: ISuppliers[] = this.selection.selected;
     const dialogRef = this.dialog.open(DeleteDialogComponent);
-
     dialogRef.afterClosed().subscribe((result) => {
-      debugger;
-      console.log(`Dialog result: ${result}`);
+      if (result) {
+        this.supplierService.deleteStores(selectedRows).subscribe({
+          next: () => {
+            this.selection.clear();
+            this.supplierService.getAllStores().subscribe(() => {
+              this.dataSource = new MatTableDataSource<ISuppliers>(
+                this.supplierService.stores
+              );
+            });
+          },
+          error: (error) => {
+            console.error('Error while deleting', error);
+          },
+        });
+      }
     });
   }
 }
