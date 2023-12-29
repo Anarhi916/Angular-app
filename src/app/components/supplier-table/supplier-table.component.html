@@ -8,7 +8,9 @@
   />
 </mat-form-field>
 <div class="toolbar-buttons">
-  <button mat-button color="primary">Create</button>
+  <button (click)="createStorePress()" mat-button color="primary">
+    Create
+  </button>
   <button
     (click)="deleteRowsPress()"
     [disabled]="!selection.selected.length"

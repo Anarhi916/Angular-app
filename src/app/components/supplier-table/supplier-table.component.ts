@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { Router } from '@angular/router';
+import { CreateStoreDialogComponent } from '../create-store-dialog/create-store-dialog.component';
 
 @Component({
   selector: 'app-supplier-table',
@@ -68,6 +69,25 @@ export class SupplierTableComponent implements OnInit {
                 this.supplierService.stores
               );
             });
+          },
+          error: (error) => {
+            console.error('Error while deleting', error);
+          },
+        });
+      }
+    });
+  }
+
+  createStorePress() {
+    let store: ISuppliers;
+    const dialogRef = this.dialog.open(CreateStoreDialogComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.supplierService.create(store).subscribe({
+          next: () => {
+            this.dataSource = new MatTableDataSource<ISuppliers>(
+              this.supplierService.stores
+            );
           },
           error: (error) => {
             console.error('Error while deleting', error);

@@ -24,6 +24,12 @@ export class SupplierService {
       .pipe(tap((stores) => (this.stores = stores)));
   }
 
+  create(store: ISuppliers): Observable<ISuppliers> {
+    return this.http
+      .post<ISuppliers>('http://localhost:3000/api/Stores', store)
+      .pipe(tap((store) => this.stores.push(store)));
+  }
+
   deleteStores(stores: ISuppliers[]): Observable<void> {
     const deleteRequests: Observable<void>[] = stores.map((store) =>
       this.http.delete<void>(`http://localhost:3000/api/Stores/${store.id}`)

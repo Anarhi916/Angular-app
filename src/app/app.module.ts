@@ -19,6 +19,8 @@ import {
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
+import { CreateStoreDialogComponent } from './components/create-store-dialog/create-store-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -35,6 +37,10 @@ import {
     MatDialogClose,
     MatDialogTitle,
     MatDialogContent,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   declarations: [
     AppComponent,
@@ -42,6 +48,7 @@ import {
     SuppliersDetailsComponent,
     SupplierTableComponent,
     DeleteDialogComponent,
+    CreateStoreDialogComponent,
   ],
   bootstrap: [AppComponent],
 })
