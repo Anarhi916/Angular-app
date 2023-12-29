@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "createDialog": "ng g c components/delete-dialog --skip-tests --standalone=false"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^17.0.7",
-    "@angular/cli": "^17.0.7",
+    "@angular/cli": "^17.0.8",
     "@angular/compiler-cli": "^17.0.0",
     "@types/jasmine": "~5.1.0",
     "jasmine-core": "~5.1.0",

@@ -2,14 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ISuppliers, SupplierService } from '../../services/supplier.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
-import {
-  MatDialog,
-  MatDialogRef,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogTitle,
-  MatDialogContent,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-supplier-table',
@@ -61,5 +55,11 @@ export class SupplierTableComponent implements OnInit {
 
   deleteRowsPress() {
     const selectedRows: ISuppliers[] = this.selection.selected;
+    const dialogRef = this.dialog.open(DeleteDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      debugger;
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

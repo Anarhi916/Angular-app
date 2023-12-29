@@ -12,6 +12,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import {
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogTitle,
+  MatDialogContent,
+} from '@angular/material/dialog';
 
 @NgModule({
   imports: [
@@ -24,12 +31,17 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
+    MatDialogActions,
+    MatDialogClose,
+    MatDialogTitle,
+    MatDialogContent,
   ],
   declarations: [
     AppComponent,
     StoresPageComponent,
     SuppliersDetailsComponent,
     SupplierTableComponent,
+    DeleteDialogComponent,
   ],
   bootstrap: [AppComponent],
 })
