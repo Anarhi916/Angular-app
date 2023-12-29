@@ -1,21 +1,85 @@
 <div class="wrapper">
-  <h1 mat-dialog-title>Create Store</h1>
-  <div mat-dialog-content class="mat-typography">
-    <mat-form-field class="form-field">
-      <mat-label>Enter store name</mat-label>
-      <input
-        matInput
-        placeholder="Doblin store"
-        [formControl]="name"
-        required
-      />
-      @if (name.invalid) {
-      <mat-error>{{ getErrorMessage() }}</mat-error>
-      }
-    </mat-form-field>
-  </div>
-  <div mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Create</button>
-    <button mat-button mat-dialog-close>Cancel</button>
-  </div>
+  <form [formGroup]="form">
+    <h1 mat-dialog-title>Create Store</h1>
+    <div mat-dialog-content class="mat-typography">
+      <mat-form-field class="form-field">
+        <mat-label>Enter store name</mat-label>
+        <input
+          matInput
+          placeholder="Doblin store"
+          formControlName="name"
+          required
+        />
+        <mat-error *ngIf="form.get('name')?.invalid">
+          {{ getErrorMessage("name") }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Enter email</mat-label>
+        <input
+          matInput
+          placeholder="pat@example.com"
+          formControlName="email"
+          required
+        />
+        <mat-error *ngIf="form.get('email')?.invalid">
+          {{ getErrorMessage("email") }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Phone number</mat-label>
+        <input
+          matInput
+          placeholder="+380973469146"
+          formControlName="tel"
+          required
+        />
+        <mat-error *ngIf="form.get('tel')?.invalid">
+          {{ getErrorMessage("tel") }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Enter address</mat-label>
+        <input
+          matInput
+          placeholder="New York, NY, USA"
+          formControlName="address"
+          required
+        />
+        <mat-error *ngIf="form.get('address')?.invalid">
+          {{ getErrorMessage("address") }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Establishing Date</mat-label>
+        <input
+          matInput
+          placeholder="12.11.2023"
+          formControlName="established"
+          required
+        />
+        <mat-error *ngIf="form.get('established')?.invalid">
+          {{ getErrorMessage("established") }}
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="form-field">
+        <mat-label>Floor Area</mat-label>
+        <input
+          matInput
+          placeholder="20 sq. m"
+          formControlName="floorArea"
+          required
+        />
+        <mat-error *ngIf="form.get('floorArea')?.invalid">
+          {{ getErrorMessage("floorArea") }}
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+        Create
+      </button>
+      <button mat-button mat-dialog-close>Cancel</button>
+    </div>
+  </form>
 </div>
