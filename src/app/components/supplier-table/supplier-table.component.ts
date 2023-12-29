@@ -4,6 +4,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-supplier-table',
@@ -14,7 +15,8 @@ export class SupplierTableComponent implements OnInit {
   dataSource: MatTableDataSource<ISuppliers>;
   constructor(
     public supplierService: SupplierService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
   ngOnInit(): void {
     this.supplierService.getAllStores().subscribe(() => {
@@ -50,7 +52,7 @@ export class SupplierTableComponent implements OnInit {
   }
 
   navToStoreDetails(row: ISuppliers) {
-    debugger;
+    this.router.navigate(['/supplier', row.id]);
   }
 
   deleteRowsPress() {
