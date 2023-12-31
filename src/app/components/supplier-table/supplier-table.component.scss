@@ -18,3 +18,10 @@ table {
   align-items: center;
   margin-bottom: 10px;
 }
+
+.sticky-toolbar {
+  position: sticky;
+  top: 0;
+  background-color: white;
+  z-index: 1000;
+}

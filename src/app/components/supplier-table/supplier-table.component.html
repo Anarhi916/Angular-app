@@ -1,24 +1,26 @@
-<mat-form-field>
-  <mat-label>Filter</mat-label>
-  <input
-    matInput
-    (keyup)="applyFilter($event)"
-    placeholder="Search..."
-    #input
-  />
-</mat-form-field>
-<div class="toolbar-buttons">
-  <button (click)="createStorePress()" mat-button color="primary">
-    Create
-  </button>
-  <button
-    (click)="deleteRowsPress()"
-    [disabled]="!selection.selected.length"
-    mat-button
-    color="primary"
-  >
-    Delete
-  </button>
+<div class="sticky-toolbar">
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Search..."
+      #input
+    />
+  </mat-form-field>
+  <div class="toolbar-buttons">
+    <button (click)="createStorePress()" mat-button color="primary">
+      Create
+    </button>
+    <button
+      (click)="deleteRowsPress()"
+      [disabled]="!selection.selected.length"
+      mat-button
+      color="primary"
+    >
+      Delete
+    </button>
+  </div>
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="select">
