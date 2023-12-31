@@ -10,17 +10,23 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class CreateStoreDialogComponent {
   constructor(public dialogRef: MatDialogRef<CreateStoreDialogComponent>) {}
   form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    address: new FormControl('', [Validators.required]),
-    established: new FormControl('', [Validators.required]),
-    floorArea: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    tel: new FormControl('', [
+    Name: new FormControl('', [Validators.required]),
+    Address: new FormControl('', [Validators.required]),
+    Established: new FormControl('', [Validators.required]),
+    FloorArea: new FormControl('', [Validators.required]),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+    PhoneNumber: new FormControl('', [
       Validators.required,
       Validators.minLength(13),
       Validators.maxLength(13),
     ]),
   });
+
+  createStore() {
+    if (this.form.valid) {
+      this.dialogRef.close(this.form.value);
+    }
+  }
 
   getErrorMessage(fieldName: string): string {
     const control = this.form.get(fieldName) as FormControl;

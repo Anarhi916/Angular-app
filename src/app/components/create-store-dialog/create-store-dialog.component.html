@@ -7,11 +7,11 @@
         <input
           matInput
           placeholder="Doblin store"
-          formControlName="name"
+          formControlName="Name"
           required
         />
-        <mat-error *ngIf="form.get('name')?.invalid">
-          {{ getErrorMessage("name") }}
+        <mat-error *ngIf="form.get('Name')?.invalid">
+          {{ getErrorMessage("Name") }}
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field">
@@ -19,11 +19,11 @@
         <input
           matInput
           placeholder="pat@example.com"
-          formControlName="email"
+          formControlName="Email"
           required
         />
-        <mat-error *ngIf="form.get('email')?.invalid">
-          {{ getErrorMessage("email") }}
+        <mat-error *ngIf="form.get('Email')?.invalid">
+          {{ getErrorMessage("Email") }}
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field">
@@ -31,11 +31,11 @@
         <input
           matInput
           placeholder="+380973469146"
-          formControlName="tel"
+          formControlName="PhoneNumber"
           required
         />
-        <mat-error *ngIf="form.get('tel')?.invalid">
-          {{ getErrorMessage("tel") }}
+        <mat-error *ngIf="form.get('PhoneNumber')?.invalid">
+          {{ getErrorMessage("PhoneNumber") }}
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field">
@@ -43,11 +43,11 @@
         <input
           matInput
           placeholder="New York, NY, USA"
-          formControlName="address"
+          formControlName="Address"
           required
         />
-        <mat-error *ngIf="form.get('address')?.invalid">
-          {{ getErrorMessage("address") }}
+        <mat-error *ngIf="form.get('Address')?.invalid">
+          {{ getErrorMessage("Address") }}
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field">
@@ -55,11 +55,11 @@
         <input
           matInput
           placeholder="12.11.2023"
-          formControlName="established"
+          formControlName="Established"
           required
         />
-        <mat-error *ngIf="form.get('established')?.invalid">
-          {{ getErrorMessage("established") }}
+        <mat-error *ngIf="form.get('Established')?.invalid">
+          {{ getErrorMessage("Established") }}
         </mat-error>
       </mat-form-field>
       <mat-form-field class="form-field">
@@ -67,18 +67,16 @@
         <input
           matInput
           placeholder="20 sq. m"
-          formControlName="floorArea"
+          formControlName="FloorArea"
           required
         />
-        <mat-error *ngIf="form.get('floorArea')?.invalid">
-          {{ getErrorMessage("floorArea") }}
+        <mat-error *ngIf="form.get('FloorArea')?.invalid">
+          {{ getErrorMessage("FloorArea") }}
         </mat-error>
       </mat-form-field>
     </div>
     <div mat-dialog-actions align="end">
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
-        Create
-      </button>
+      <button (click)="createStore()" mat-button cdkFocusInitial>Create</button>
       <button mat-button mat-dialog-close>Cancel</button>
     </div>
   </form>

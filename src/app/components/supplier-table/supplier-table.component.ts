@@ -79,18 +79,18 @@ export class SupplierTableComponent implements OnInit {
   }
 
   createStorePress() {
-    let store: ISuppliers;
     const dialogRef = this.dialog.open(CreateStoreDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.supplierService.create(store).subscribe({
+        result.Established = new Date();
+        this.supplierService.create(result).subscribe({
           next: () => {
             this.dataSource = new MatTableDataSource<ISuppliers>(
               this.supplierService.stores
             );
           },
           error: (error) => {
-            console.error('Error while deleting', error);
+            console.error('Error while creating', error);
           },
         });
       }
