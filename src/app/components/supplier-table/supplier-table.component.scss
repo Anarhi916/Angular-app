@@ -25,3 +25,10 @@ table {
   background-color: white;
   z-index: 1000;
 }
+
+.sticky-table-header {
+  position: sticky;
+  top: 114px;
+  background-color: white;
+  z-index: 1000;
+}
