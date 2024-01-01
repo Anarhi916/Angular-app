@@ -6,6 +6,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { Router } from '@angular/router';
 import { CreateStoreDialogComponent } from '../create-store-dialog/create-store-dialog.component';
+import { MessagePopupComponent } from '../message-popup/message-popup.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-stores-table',
@@ -17,7 +19,8 @@ export class StoresTableComponent implements OnInit {
   constructor(
     public supplierService: SupplierService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private _snackBar: MatSnackBar
   ) {}
   ngOnInit(): void {
     this.supplierService.getAllStores().subscribe(() => {
@@ -70,6 +73,10 @@ export class StoresTableComponent implements OnInit {
             this.dataSource = new MatTableDataSource<IStores>(
               this.supplierService.stores
             );
+            this._snackBar.openFromComponent(MessagePopupComponent, {
+              duration: 3000,
+              data: 'Selected items were deleted successfully',
+            });
           },
           error: (error) => {
             console.error('Error while deleting', error);
@@ -89,6 +96,10 @@ export class StoresTableComponent implements OnInit {
             this.dataSource = new MatTableDataSource<IStores>(
               this.supplierService.stores
             );
+            this._snackBar.openFromComponent(MessagePopupComponent, {
+              duration: 3000,
+              data: `Store ${result.Name} was created successfully`,
+            });
           },
           error: (error) => {
             console.error('Error while creating', error);

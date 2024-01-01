@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "createDialog": "ng g c components/delete-dialog --skip-tests --standalone=false"
+    "createDialog": "ng g c components/message-popup --skip-tests --standalone=false"
   },
   "private": true,
   "dependencies": {

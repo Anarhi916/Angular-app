@@ -40,15 +40,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
-  ],
+    ReactiveFormsModule],
   declarations: [
     AppComponent,
     StoresPageComponent,
     SuppliersDetailsComponent,
     StoresTableComponent,
     DeleteDialogComponent,
-    CreateStoreDialogComponent,
+    CreateStoreDialogComponent
   ],
   bootstrap: [AppComponent],
 })
