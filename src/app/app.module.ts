@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { StoresPageComponent } from './pages/stores-page/stores-page.component';
 import { SuppliersDetailsComponent } from './pages/suppliers-details/suppliers-details.component';
-import { SupplierTableComponent } from './components/supplier-table/supplier-table.component';
+import { StoresTableComponent } from './components/stores-table/stores-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
@@ -46,7 +46,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     StoresPageComponent,
     SuppliersDetailsComponent,
-    SupplierTableComponent,
+    StoresTableComponent,
     DeleteDialogComponent,
     CreateStoreDialogComponent,
   ],

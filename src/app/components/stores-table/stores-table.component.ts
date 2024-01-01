@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ISuppliers, SupplierService } from '../../services/supplier.service';
+import { IStores, SupplierService } from '../../services/supplier.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 import { CreateStoreDialogComponent } from '../create-store-dialog/create-store-dialog.component';
 
 @Component({
-  selector: 'app-supplier-table',
-  templateUrl: './supplier-table.component.html',
-  styleUrl: './supplier-table.component.scss',
+  selector: 'app-stores-table',
+  templateUrl: './stores-table.component.html',
+  styleUrl: './stores-table.component.scss',
 })
-export class SupplierTableComponent implements OnInit {
-  dataSource: MatTableDataSource<ISuppliers>;
+export class StoresTableComponent implements OnInit {
+  dataSource: MatTableDataSource<IStores>;
   constructor(
     public supplierService: SupplierService,
     public dialog: MatDialog,
@@ -21,14 +21,14 @@ export class SupplierTableComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.supplierService.getAllStores().subscribe(() => {
-      this.dataSource = new MatTableDataSource<ISuppliers>(
+      this.dataSource = new MatTableDataSource<IStores>(
         this.supplierService.stores
       );
     });
   }
   displayedColumns: string[] = ['select', 'name', 'address', 'id'];
 
-  selection = new SelectionModel<ISuppliers>(true, []);
+  selection = new SelectionModel<IStores>(true, []);
 
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -52,23 +52,24 @@ export class SupplierTableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  navToStoreDetails(row: ISuppliers) {
+  navToStoreDetails(row: IStores) {
     this.router.navigate(['/supplier', row.id]);
   }
 
   deleteRowsPress() {
-    const selectedRows: ISuppliers[] = this.selection.selected;
+    const selectedRows: IStores[] = this.selection.selected;
     const dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.supplierService.deleteStores(selectedRows).subscribe({
           next: () => {
             this.selection.clear();
-            this.supplierService.getAllStores().subscribe(() => {
-              this.dataSource = new MatTableDataSource<ISuppliers>(
-                this.supplierService.stores
-              );
-            });
+            this.supplierService.stores = this.supplierService.stores.filter(
+              (store) => !selectedRows.find((row) => row.id === store.id)
+            );
+            this.dataSource = new MatTableDataSource<IStores>(
+              this.supplierService.stores
+            );
           },
           error: (error) => {
             console.error('Error while deleting', error);
@@ -85,7 +86,7 @@ export class SupplierTableComponent implements OnInit {
         result.Established = new Date();
         this.supplierService.create(result).subscribe({
           next: () => {
-            this.dataSource = new MatTableDataSource<ISuppliers>(
+            this.dataSource = new MatTableDataSource<IStores>(
               this.supplierService.stores
             );
           },
