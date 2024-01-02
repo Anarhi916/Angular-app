@@ -1,0 +1,19 @@
+.title {
+  margin-top: 10px;
+}
+.label-block {
+  display: flex;
+}
+
+.label {
+  font-weight: bold;
+}
+
+.text-column {
+  flex-grow: 1;
+}
+
+.text {
+  display: block;
+  margin-bottom: 10px;
+}

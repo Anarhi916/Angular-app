@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import { StoresPageComponent } from './pages/stores-page/stores-page.component';
-import { SuppliersDetailsComponent } from './pages/suppliers-details/suppliers-details.component';
+import { StoresDetailsComponent } from './pages/stores-details/stores-details.component';
 import { StoresTableComponent } from './components/stores-table/stores-table.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTableModule } from '@angular/material/table';
@@ -49,7 +49,7 @@ import { MatNativeDateModule } from '@angular/material/core';
   declarations: [
     AppComponent,
     StoresPageComponent,
-    SuppliersDetailsComponent,
+    StoresDetailsComponent,
     StoresTableComponent,
     DeleteDialogComponent,
     CreateStoreDialogComponent,

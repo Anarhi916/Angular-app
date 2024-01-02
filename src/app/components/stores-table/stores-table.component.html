@@ -1,13 +1,4 @@
 <div class="sticky-toolbar">
-  <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input
-      matInput
-      (keyup)="applyFilter($event)"
-      placeholder="Search..."
-      #input
-    />
-  </mat-form-field>
   <div class="toolbar-buttons">
     <button (click)="createStorePress()" mat-button color="primary">
       Create
@@ -21,6 +12,15 @@
       Delete
     </button>
   </div>
+  <mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="Search..."
+      #input
+    />
+  </mat-form-field>
 </div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <ng-container matColumnDef="select">
