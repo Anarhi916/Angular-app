@@ -90,7 +90,6 @@ export class StoresTableComponent implements OnInit {
     const dialogRef = this.dialog.open(CreateStoreDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        result.Established = new Date();
         this.supplierService.create(result).subscribe({
           next: () => {
             this.dataSource = new MatTableDataSource<IStores>(

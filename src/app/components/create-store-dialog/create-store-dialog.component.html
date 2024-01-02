@@ -53,14 +53,17 @@
       <mat-form-field class="form-field">
         <mat-label>Establishing Date</mat-label>
         <input
-          matInput
-          placeholder="12.11.2023"
           formControlName="Established"
           required
+          matInput
+          [matDatepicker]="picker"
         />
-        <mat-error *ngIf="form.get('Established')?.invalid">
-          {{ getErrorMessage("Established") }}
-        </mat-error>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field class="form-field">
         <mat-label>Floor Area</mat-label>

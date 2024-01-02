@@ -21,6 +21,8 @@ import {
 } from '@angular/material/dialog';
 import { CreateStoreDialogComponent } from './components/create-store-dialog/create-store-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   imports: [
@@ -40,14 +42,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+  ],
   declarations: [
     AppComponent,
     StoresPageComponent,
     SuppliersDetailsComponent,
     StoresTableComponent,
     DeleteDialogComponent,
-    CreateStoreDialogComponent
+    CreateStoreDialogComponent,
   ],
   bootstrap: [AppComponent],
 })
