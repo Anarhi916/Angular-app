@@ -1,6 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, tap, throwError, forkJoin, map } from 'rxjs';
+import {
+  Observable,
+  catchError,
+  tap,
+  throwError,
+  forkJoin,
+  map,
+  BehaviorSubject,
+} from 'rxjs';
 
 export interface IStores {
   Name: string;
@@ -15,19 +23,27 @@ export interface IStores {
   providedIn: 'root',
 })
 export class SupplierService {
-  constructor(private http: HttpClient) {}
-  stores: IStores[] = [];
+  constructor(private http: HttpClient) {
+    this.getAllStores().subscribe();
+  }
+  private storesSubject = new BehaviorSubject<IStores[]>([]);
+  stores$: Observable<IStores[]> = this.storesSubject.asObservable();
 
   getAllStores(): Observable<IStores[]> {
     return this.http
       .get<IStores[]>('http://localhost:3000/api/Stores')
-      .pipe(tap((stores) => (this.stores = stores)));
+      .pipe(tap((stores) => this.storesSubject.next(stores)));
   }
 
   create(store: IStores): Observable<IStores> {
     return this.http
       .post<IStores>('http://localhost:3000/api/Stores', store)
-      .pipe(tap((store) => this.stores.push(store)));
+      .pipe(
+        tap((store) => {
+          const currentStores = this.storesSubject.value;
+          this.storesSubject.next([...currentStores, store]);
+        })
+      );
   }
 
   deleteStores(stores: IStores[]): Observable<void> {
@@ -35,7 +51,16 @@ export class SupplierService {
       this.http.delete<void>(`http://localhost:3000/api/Stores/${store.id}`)
     );
     return forkJoin(deleteRequests).pipe(
-      map(() => {}),
+      map(() => {
+        const currentStores = this.storesSubject.value;
+        stores.forEach((store) => {
+          const index = currentStores.findIndex((s) => s.id === store.id);
+          if (index !== -1) {
+            currentStores.splice(index, 1);
+          }
+        });
+        this.storesSubject.next([...currentStores]);
+      }),
       catchError((error: HttpErrorResponse) => {
         return throwError(() => error.message);
       })

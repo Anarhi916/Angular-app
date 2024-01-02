@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { IStores, SupplierService } from '../../services/supplier.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
@@ -8,39 +8,44 @@ import { Router } from '@angular/router';
 import { CreateStoreDialogComponent } from '../create-store-dialog/create-store-dialog.component';
 import { MessagePopupComponent } from '../message-popup/message-popup.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-stores-table',
   templateUrl: './stores-table.component.html',
   styleUrl: './stores-table.component.scss',
 })
-export class StoresTableComponent implements OnInit {
+export class StoresTableComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<IStores>;
+  private storesSubscription: Subscription;
+  displayedColumns: string[] = ['select', 'name', 'address', 'id'];
+  selection = new SelectionModel<IStores>(true, []);
+
   constructor(
     public supplierService: SupplierService,
     public dialog: MatDialog,
     private router: Router,
     private _snackBar: MatSnackBar
   ) {}
+
   ngOnInit(): void {
-    this.supplierService.getAllStores().subscribe(() => {
-      this.dataSource = new MatTableDataSource<IStores>(
-        this.supplierService.stores
-      );
-    });
+    this.storesSubscription = this.supplierService.stores$.subscribe(
+      (stores) => {
+        this.dataSource = new MatTableDataSource<IStores>(stores);
+      }
+    );
   }
-  displayedColumns: string[] = ['select', 'name', 'address', 'id'];
 
-  selection = new SelectionModel<IStores>(true, []);
+  ngOnDestroy(): void {
+    this.storesSubscription.unsubscribe();
+  }
 
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -67,12 +72,9 @@ export class StoresTableComponent implements OnInit {
         this.supplierService.deleteStores(selectedRows).subscribe({
           next: () => {
             this.selection.clear();
-            this.supplierService.stores = this.supplierService.stores.filter(
-              (store) => !selectedRows.find((row) => row.id === store.id)
-            );
-            this.dataSource = new MatTableDataSource<IStores>(
-              this.supplierService.stores
-            );
+            // this.dataSource = new MatTableDataSource<IStores>(
+            //   this.supplierService.stores
+            // );
             this._snackBar.openFromComponent(MessagePopupComponent, {
               duration: 3000,
               data: 'Selected items were deleted successfully',
@@ -92,9 +94,9 @@ export class StoresTableComponent implements OnInit {
       if (result) {
         this.supplierService.create(result).subscribe({
           next: () => {
-            this.dataSource = new MatTableDataSource<IStores>(
-              this.supplierService.stores
-            );
+            // this.dataSource = new MatTableDataSource<IStores>(
+            //   this.supplierService.stores
+            // );
             this._snackBar.openFromComponent(MessagePopupComponent, {
               duration: 3000,
               data: `Store ${result.Name} was created successfully`,

@@ -1,17 +1,17 @@
 <h1 class="title">{{ title }}</h1>
-<div class="label-block">
+<div class="label-block" *ngIf="store">
   <div class="text-column">
     <label class="label">Email:</label>
-    <span class="text">Athena.Raynor14аhotmail.com</span>
+    <span class="text">{{ store.Email }}</span>
     <label class="label">Phone number:</label>
-    <span class="text">267.388.0098 x69833</span>
+    <span class="text">{{ store.PhoneNumber }}</span>
     <label class="label">Address:</label>
-    <span class="text">267.388.0098 x69833</span>
+    <span class="text">{{ store.Address }}</span>
   </div>
   <div class="text-column">
     <label class="label">Established Date:</label>
-    <span class="text">267.388.0098 x69833</span>
+    <span class="text">{{ store.Established }}</span>
     <label class="label">Floor Area:</label>
-    <span class="text">267.388.0098 x69833</span>
+    <span class="text">{{ store.FloorArea }}</span>
   </div>
 </div>
