@@ -23,6 +23,7 @@ import { CreateStoreDialogComponent } from './components/create-store-dialog/cre
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { BreadcrumbsComponent } from './components/breadcrumbs/breadcrumbs.component';
 
 @NgModule({
   imports: [
@@ -53,6 +54,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     StoresTableComponent,
     DeleteDialogComponent,
     CreateStoreDialogComponent,
+    BreadcrumbsComponent,
   ],
   bootstrap: [AppComponent],
 })

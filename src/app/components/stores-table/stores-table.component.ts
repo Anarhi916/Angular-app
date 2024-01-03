@@ -61,7 +61,7 @@ export class StoresTableComponent implements OnInit, OnDestroy {
   }
 
   navToStoreDetails(row: IStores) {
-    this.router.navigate(['/supplier', row.id]);
+    this.router.navigate(['/store', row.id]);
   }
 
   deleteRowsPress() {
@@ -72,9 +72,6 @@ export class StoresTableComponent implements OnInit, OnDestroy {
         this.supplierService.deleteStores(selectedRows).subscribe({
           next: () => {
             this.selection.clear();
-            // this.dataSource = new MatTableDataSource<IStores>(
-            //   this.supplierService.stores
-            // );
             this._snackBar.openFromComponent(MessagePopupComponent, {
               duration: 3000,
               data: 'Selected items were deleted successfully',
@@ -94,9 +91,6 @@ export class StoresTableComponent implements OnInit, OnDestroy {
       if (result) {
         this.supplierService.create(result).subscribe({
           next: () => {
-            // this.dataSource = new MatTableDataSource<IStores>(
-            //   this.supplierService.stores
-            // );
             this._snackBar.openFromComponent(MessagePopupComponent, {
               duration: 3000,
               data: `Store ${result.Name} was created successfully`,

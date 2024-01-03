@@ -10,15 +10,20 @@ import { ActivatedRoute } from '@angular/router';
 export class StoresDetailsComponent implements OnInit {
   store: IStores;
   title: string = 'Stores Details';
+  storeId: number | null = null;
+  breadcrumbsItems = [
+    { label: 'Stores', link: '/' },
+    { label: 'Stores Details', link: `/store/${this.storeId}` },
+  ];
   constructor(
     public supplierService: SupplierService,
     private route: ActivatedRoute
   ) {}
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      const id = +params['id'];
+      this.storeId = +params['id'];
       this.supplierService.stores$.subscribe((stores) => {
-        this.store = stores.find((store) => store.id === id)!;
+        this.store = stores.find((store) => store.id === this.storeId)!;
       });
     });
   }
